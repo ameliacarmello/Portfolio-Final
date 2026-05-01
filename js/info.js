@@ -1,33 +1,28 @@
 const personDetails = {
     personal: {
-      firstName: "Pulkit",
-      lastName: "Handa",
-      email: "pulkit.handa@ais.amity.edu",
-      age: 15,
-      languages: "Hindi, English & French",
-      phone: "Will be Available soon 😉",
-      contactMail: "pulkit.handa2005@gmail.com",
-      address: "Haryana, India",
-      nationality: "Indian 🇮🇳",
-      freelance: "Will be Available soon 😉",
-      description: "I'm a Web Designer & Full Stack Developer who is focused on crafting user‑friendly products, I have the ability to build Discord bots, Telegram bots, Web apps and Websites. I am passionate about building excellent software that improves the lives of those around me."
+      firstName: "Amelia",
+      lastName: "Carmello",
+      email: "acarmello07@gmail.com",
+      age: 21,
+      
+      location: "Philadelphia, PA",
+      description: "I’m a graduating senior at Temple University that is passionate about people, health, and happiness! I am currently Majoring in Sociology, with minors in Public Health and Healthcare Management, along with a certificate in Geographic Information Systems, or GIS. Some of my passions outside of academics include baking, crochet, long walks, being social, and public health."
     },
     professional: {
       yoe: 1,
-      completedProjects: 16,
-      happyCustomers: 2,
-      awardsWon: 3,
+      completedProjects: 6,
+      awardsWon: 1,
     },
     academic: {
       college: {
-        name: "LET'S SEE 😉",
-        duration: "2024-2028(expected)",
-        course: "",
+        name: "Graduating May 2026",
+       
+        course: "Sociology, Public Health, Healthcare Management, GIS",
       },
       school: {
-        name: "Amity International School",
-        duration: "2021 - Present",
-        course: "High School"
+        name: "Temple University",
+        duration: "2022 - 2026",
+        course: "Bachelor of Arts"
       }
     },
     skills: {
