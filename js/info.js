@@ -28,20 +28,17 @@ const personDetails = {
     skills: {
       // key: skill name
       // value: skill percentage
-      "html": 95,
-      "javascript": 10,
-      "css": 70,
-      "nodejs": 10,
-      "wordpress": 85,
-      "python": 10,
-      "gitAndGithub": 50,
-      "vscode": 50,
+      "html": 100,
+      "javascript": 100,
+        "Leaflet": 100,
+      "JS Libraries": 100,
+      "Amazon Q": 100,
+      "Github": 100,
+      "vscode": 100,
       },
     social: {
-      github: "https://github.com/pulkithanda",
-      linkedin: "https://www.linkedin.com/in/pulkit-handa-2286721aa/",
-      codepen: "https://codepen.io/pulkitchamp",
-      telegram: "https://t.me/Pulkit_Champ"
+      github: "https://github.com/ameliacarmello/ameliacarmello",
+      linkedin: "https://www.linkedin.com/in/amelia-carmello-690242358/",
     }
   };
 
@@ -73,20 +70,13 @@ const personDetails = {
   setElemAttribute('person-fname', personDetails.personal.firstName);
   setElemAttribute('person-lname', personDetails.personal.lastName);
   setElemAttribute('person-age', personDetails.personal.age);
-  setElemAttribute('person-address', personDetails.personal.address);
-  setElemAttribute('person-nationality', personDetails.personal.nationality);
-  setElemAttribute('person-freelance', personDetails.personal.freelance);
   setElemAttribute('person-email', personDetails.personal.email);
-  setElemAttribute('person-contactMail', personDetails.personal.contactMail);
-  setElemAttribute('person-phone', personDetails.personal.phone);
-  setElemAttribute('person-languages', personDetails.personal.languages);
+
   // professional
   setElemAttribute('person-yoe', personDetails.professional.yoe);
   setElemAttribute('person-completedProjects', personDetails.professional.completedProjects);
-  setElemAttribute('person-happyCustomers', personDetails.professional.happyCustomers);
   setElemAttribute('person-awardsWon', personDetails.professional.awardsWon);
   // academic
-  setElemAttribute('school-duration', personDetails.academic.school.duration);
   setElemAttribute('school-name', personDetails.academic.school.name);
   setElemAttribute('school-course', personDetails.academic.school.course);
   setElemAttribute('college-duration', personDetails.academic.college.duration);
@@ -94,17 +84,14 @@ const personDetails = {
 
   // TODO: can be replaced with a loop
   setSkillValue('html');
-  setSkillValue('css');
   setSkillValue('javascript');
-  setSkillValue('python');
-  setSkillValue('nodejs');
-  setSkillValue('wordpress');
-  setSkillValue('gitAndGithub');
+  setSkillValue('Leaflet');
+  setSkillValue('JS Libraries');
+  setSkillValue('Amazon Q');
+  setSkillValue('Github');
   setSkillValue('vscode');
 
   // contact.html
   setElemAttribute('github', personDetails.social.github, 'href');
-  setElemAttribute('codepen', personDetails.social.codepen, 'href');
-  setElemAttribute('telegram', personDetails.social.telegram, 'href');
   setElemAttribute('linkedin', personDetails.social.linkedin, 'href');
   setElemAttribute('mail-hyperlink', "mailto:"+personDetails.personal.contactMail, 'href');
