@@ -1,0 +1,103 @@
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>Census Division 2011-2016 Population Change</title>
+
+    <link rel="stylesheet" href="https://js.arcgis.com/4.28/esri/themes/light/main.css" />
+    <script src="https://js.arcgis.com/4.28/"></script>
+
+    <style>
+      html,
+      body,
+      #viewDiv {
+        padding: 0;
+        margin: 0;
+        height: 100%;
+        width: 100%;
+      }
+    </style>
+
+    <script>
+      require(["esri/Map", "esri/views/MapView", "esri/layers/FeatureLayer", "esri/widgets/Legend"], (
+        Map,
+        MapView,
+        FeatureLayer,
+        Legend
+      ) => {
+        const defaultSym = {
+          type: "simple-fill",
+          outline: {
+            color: [128, 128, 128, 0.2],
+            width: "0.5px"
+          }
+        };
+
+        const renderer = {
+          type: "simple",
+          symbol: defaultSym,
+          label: "Census Division",
+          visualVariables: [
+            {
+              type: "color",
+              field: "Value",
+              legendOptions: {
+                title: "Population Change (2011-2016)"
+              },
+              stops: [
+                {
+                  value: -10,
+                  color: "#d7191c",
+                  label: "Population Loss"
+                },
+                {
+                  value: 0,
+                  color: "#ffffbf",
+                  label: "No Change"
+                },
+                {
+                  value: 10,
+                  color: "#1a9641",
+                  label: "Population Gain"
+                }
+              ]
+            }
+          ]
+        };
+
+        const censusLayer = new FeatureLayer({
+          url: "https://services.arcgis.com/V6ZHFr6zdgNZuVG0/ArcGIS/rest/services/Census_Division_2011_to_2016_Pop_Change/FeatureServer/0",
+          renderer: renderer,
+          title: "Census Division Population Change 2011-2016",
+          popupTemplate: {
+            title: "{CDNAME}",
+            content: "Population change from 2011 to 2016: {Pop_Change}"
+          }
+        });
+
+        const map = new Map({
+          basemap: "streets",
+          layers: [censusLayer]
+        });
+
+        const view = new MapView({
+          container: "viewDiv",
+          map: map,
+          center: [-96, 60],
+          zoom: 3
+        });
+
+        view.ui.add(
+          new Legend({
+            view: view
+          }),
+          "bottom-left"
+        );
+      });
+    </script>
+  </head>
+
+  <body>
+    <div id="viewDiv"></div>
+  </body>
+</html>
