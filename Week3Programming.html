@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pennsylvania Map</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <style>
+        #map { height: 600px; }
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+    <script>
+        //Below is the prompt I used in Amazon Q to write this code: 
+        /* please create a leaflet map of pennsylvania featuring circles around the cities of Harrisburg and Lancaster.
+         Please use tooltips instead of popups to display the name of the city.*/
+
+
+        //creating map center and zoom
+        const map = L.map('map').setView([40.5, -77], 7);
+
+        // Using control map state options as seen in the leaflet to initialize the map in another way:
+/* var map= L.map('map', {
+    zoom: 7,
+    center: [40.5,-77]
+    } 
+*/
+
+        //tile layer
+        var OpenStreetMap_HOT = L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
+	maxZoom: 19,
+	attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Tiles style by <a href="https://www.hotosm.org/" target="_blank">Humanitarian OpenStreetMap Team</a> hosted by <a href="https://openstreetmap.fr/" target="_blank">OpenStreetMap France</a>'
+}).addTo(map);
+
+        //city data
+    var Harrisburg = {
+      name: 'Harrisburg', 
+      lat: 40.2732,
+      lng: -76.8867,
+      population: 50600
+    }
+    
+    var Lancaster = {
+      name: 'Lancaster',  
+      lat: 40.0379,
+      lng: -76.3055,
+      population: 58039
+    }; 
+
+    //adding circles to the cities
+    L.circle([Harrisburg.lat, Harrisburg.lng], {
+        radius: Math.sqrt(Harrisburg.population)/10,
+        color: 'gold',
+        fillColor: 'blue',
+        weight: 6
+
+//Modifying the circle's fill opacity as seen in the "path" section on the Leaflet:
+        // fillOpacity: 0.5
+        
+        }).bindTooltip ("<b>" + 'Name: ' + "</b>" + "<i>" + Harrisburg.name + "</i>" + "<br>" + "<b>" + 'Population: ' + "</b>" + "<i>" + Harrisburg.population + "</i>")
+      .addTo(map);
+    
+      
+      L.circleMarker([Lancaster.lat, Lancaster.lng], {
+        radius:   Math.sqrt(Lancaster.population)/10,
+        color: 'red',
+        fillColor: 'blue',
+        weight: 6
+        
+        }).bindTooltip ("<b>" + 'Name: ' + "</b>" + "<i>" + Lancaster.name + "</i>" + "<br>" + "<b>" + 'Population: ' + "</b>" + "<i>" + Lancaster.population + "</i>")
+      .addTo(map);
+
+      //adding a standalone tooltip to map as seen in the "tooltip" section of the leaflet:
+/*var tooltip = L.tooltip([40.3370,-75.9214], {content: 'Adding comments to my text file!'})
+    .addTo(map);*/
+    
+   
+    </script>
+</body>
+</html>
