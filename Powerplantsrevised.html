@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset=utf-8 />
+    <title>US Electric Power Generation</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"></script>
+    <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: whitesmoke;
+            font-family: Lato, sans-serif;
+            color: #0D0000;
+        }
+        header {
+            padding: 6px 10%;
+        }
+        h1 {
+            display: inline-block;
+            margin-right: 20px;
+            color: #001323;
+        }
+        h2 {
+            display: inline-block;
+            color: #001323;
+        }
+        #map {
+            width: 80%;
+            height: 540px;
+            margin: 10px auto;
+        }
+        footer {
+            padding: 6px 10%;
+            width: 80%;
+            font-size: 0.8em;
+        }
+        p {
+            font-size: 1em;
+            color: #001323;
+        }
+
+        /* Legend styling */
+        .legend {
+            background: white;
+            padding: 10px;
+            line-height: 1.5em;
+            color: #333;
+            border-radius: 5px;
+            box-shadow: 0 0 6px rgba(0,0,0,0.3);
+        }
+
+        .legend i {
+            width: 10px;
+            height: 10px;
+            float: left;
+            margin-right: 8px;
+            opacity: 0.7;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>US Electric Power Generation</h1>
+        <h2>Biomass, Geothermal, and Solar Comparison</h2>
+    </header>
+
+    <div id='map'></div>
+
+    <footer>
+        <p>Map authored by Amelia Carmello</p>
+        <p>This map displays power generation capacity in MW (mega watts) from renewable energy sources across the United States. Click on symbols to view plant details.</p>
+
+        <p>
+        <b>Design Principle Used:</b> Using visual variables such as symbol size to communicate data clearly.  
+        <br>
+        <b>Change Made:</b> I added a legend explaining the proportional circle sizes that represent power plant capacity.  
+        <br>
+        <b>Improved User Experience:</b> The legend helps users understand how circle size relates to megawatt capacity, making it easier to compare power plants across the map.
+        </p>
+    </footer>
+
+    <script src="power-plants.js"></script>
+    <script>
+
+      var map = L.map('map', {
+          center: [36,-94],
+          zoom: 4,
+      });
+      
+      var tiles = L.tileLayer('http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png', {
+          attribution: '&copy; OpenStreetMap &copy; CARTO',
+          subdomains: 'abcd',
+          maxZoom: 19
+      });  
+      
+      tiles.addTo(map);
+        
+      function getRadius(capacity){
+          var radius = Math.sqrt(capacity/Math.PI);
+          return radius * 0.8;   
+      }
+      
+      var biomassLayer = L.geoJson(plants, {
+          pointToLayer: function(feature, latlng) {
+              return L.circleMarker(latlng, {
+                 color: '#000',
+                 weight: 1,
+                 fillColor: '#ff6b35',
+                 fillOpacity: 0.7,
+                 radius: getRadius(feature.properties.capacity_mw)
+              });   
+          },
+          filter: function(feature) {
+              return feature.properties.fuel_source['Biomass'];
+          },
+          onEachFeature: function(feature, layer) {
+              var popup = "<b>" + feature.properties.plant_name + "</b><br>" +
+                          feature.properties.capacity_mw.toLocaleString() + " MW";
+              layer.bindPopup(popup);
+          }
+      });
+      
+      var geothermalLayer = L.geoJson(plants, {
+          pointToLayer: function(feature, latlng) {
+              return L.circleMarker(latlng, {
+                 color: '#000',
+                 weight: 1,
+                 fillColor: '#f72585',
+                 fillOpacity: 0.7,
+                 radius: getRadius(feature.properties.capacity_mw)
+              });   
+          },
+          filter: function(feature) {
+              return feature.properties.fuel_source['Geothermal'];
+          },
+          onEachFeature: function(feature, layer) {
+              var popup = "<b>" + feature.properties.plant_name + "</b><br>" +
+                          feature.properties.capacity_mw.toLocaleString() + " MW";
+              layer.bindPopup(popup);
+          }
+      });
+      
+      var solarLayer = L.geoJson(plants, {
+          pointToLayer: function(feature, latlng) {
+              return L.circleMarker(latlng, {
+                 color: '#000',
+                 weight: 1,
+                 fillColor: '#ffd60a',
+                 fillOpacity: 0.7,
+                 radius: getRadius(feature.properties.capacity_mw)
+              });   
+          },
+          filter: function(feature) {
+              return feature.properties.fuel_source['Solar'];
+          },
+          onEachFeature: function(feature, layer) {
+              var popup = "<b>" + feature.properties.plant_name + "</b><br>" +
+                          feature.properties.capacity_mw.toLocaleString() + " MW";
+              layer.bindPopup(popup);
+          }
+      });
+      
+      var sourcesLayers = {
+          "<span style='color: #ff6b35; font-weight: bold;'>Biomass</span>": biomassLayer,
+          "<span style='color: #f72585; font-weight: bold;'>Geothermal</span>": geothermalLayer,
+          "<span style='color: #ffd60a; font-weight: bold;'>Solar</span>": solarLayer
+      };
+      
+      L.control.layers(null, sourcesLayers, { collapsed: false }).addTo(map);
+      
+      biomassLayer.addTo(map);
+      geothermalLayer.addTo(map);
+      solarLayer.addTo(map);
+
+      /*proportional symbol legend */
+      var legend = L.control({position: 'bottomright'});
+
+      legend.onAdd = function () {
+
+          var div = L.DomUtil.create('div', 'legend'),
+              sizes = [100, 1000, 5000];
+
+          div.innerHTML += "<b>Plant Capacity (MW)</b><br>";
+
+          for (var i = 0; i < sizes.length; i++) {
+              div.innerHTML +=
+                  '<div style="display:flex;align-items:center;margin-bottom:4px;">' +
+                  '<span style="background:#999;border-radius:50%;display:inline-block;width:' +
+                  (getRadius(sizes[i])*2) + 'px;height:' +
+                  (getRadius(sizes[i])*2) + 'px;margin-right:8px;"></span>' +
+                  sizes[i] + ' MW</div>';
+          }
+
+          return div;
+      };
+
+      legend.addTo(map);
+          
+    </script>
+    
+</body>
+
+</html>
