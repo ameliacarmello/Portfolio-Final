@@ -1,0 +1,128 @@
+<html lang="en"> 
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>Hospital Beds Proportional Symbol Map</title>
+
+    <link rel="stylesheet" href="https://js.arcgis.com/4.28/esri/themes/dark/main.css" />
+    <script src="https://js.arcgis.com/4.28/"></script>
+
+    <style>
+      html,
+      body,
+      #viewDiv {
+        padding: 0;
+        margin: 0;
+        height: 100%;
+        width: 100%;
+      }
+    </style>
+
+    <script>
+      require([
+        "esri/Map", 
+        "esri/views/MapView", 
+        "esri/layers/FeatureLayer", 
+        "esri/widgets/Legend"
+      ], (
+        Map,
+        MapView,
+        FeatureLayer,
+        Legend
+      ) => {
+
+        const defaultSym = {
+          type: "simple-marker",
+          color: [0, 150, 255, 0.6],
+          outline: {
+            color: "#ffffff",
+            width: 1
+          }
+        };
+
+        // UPDATED proportional symbol classes
+        const renderer = {
+          type: "simple",
+          symbol: defaultSym,
+          visualVariables: [
+            {
+              type: "size",
+              field: "Total_Beds",
+              legendOptions: {
+                title: "Number of Hospital Beds"
+              },
+              stops: [
+                {
+                  value: 50,
+                  size: 10,
+                  label: "Small (<100 beds)"
+                },
+                {
+                  value: 200,
+                  size: 25,
+                  label: "Medium (100–300 beds)"
+                },
+                {
+                  value: 400,
+                  size: 40,
+                  label: "Large (300+ beds)"
+                }
+              ]
+            }
+          ]
+        };
+
+        const hospitalLayer = new FeatureLayer({
+          url: "https://services.arcgis.com/V6ZHFr6zdgNZuVG0/ArcGIS/rest/services/HospitalsReuploadedTEMP1/FeatureServer/0",
+          renderer: renderer,
+          title: "Hospital Capacity",
+          
+          popupTemplate: {
+            title: "{NAME}",
+            content: `
+              <b>Hospital:</b> {NAME}<br>
+              <b>Location:</b> {City}, Kentucky, {Address} <br><br>
+              This hospital has a capacity of <b>{Total_Beds}</b> patient beds. 
+              Larger symbols represent hospitals with greater healthcare capacity.
+            `,
+            fieldInfos: [
+              {
+                fieldName: "Total_Beds",
+                format: {
+                  digitSeparator: true,
+                  places: 0
+                }
+              }
+            ]
+          }
+        });
+
+        const map = new Map({
+          basemap: "dark-gray-vector",
+          layers: [hospitalLayer]
+        });
+
+        const view = new MapView({
+          container: "viewDiv",
+          map: map
+        });
+
+        // ✅ Automatically zoom to dataset extent
+        view.when(() => {
+          view.goTo(hospitalLayer.fullExtent);
+        });
+
+        const legend = new Legend({
+          view: view
+        });
+
+        view.ui.add(legend, "top-right");
+
+      });
+    </script>
+  </head>
+
+  <body>
+    <div id="viewDiv"></div>
+  </body>
+</html>
