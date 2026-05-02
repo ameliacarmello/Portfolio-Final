@@ -10,7 +10,7 @@ const personDetails = {
     },
     professional: {
       yoe: 1,
-      completedProjects: 6,
+      completedProjects: 7,
       awardsWon: 1,
     },
     academic: {
