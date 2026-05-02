@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>   
+
+    <title>North American Cities</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <style>
+        #map { height: 600px; width: 100%; }
+        body { margin: 0; padding: 20px; font-family: Arial, sans-serif; }
+    </style>
+</head>
+<body>
+    <h1>North American Cities Map</h1>
+    <div id="map"></div>
+    
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+        /* below is the prompt used by Amazon Q to create this code: 
+  "create a leaflet map with three north american cities and include everything needed to run the program"*/
+        
+        var map = L.map('map').setView([37.0, -100.0], 4);
+
+// Referencing the "control options" and "map state options" portions and initializing the map as seen in the Leaflet: 
+        // var map= L.map('map', {
+        //zoom: 3,
+        //center: [38,-100]
+        //}
+        
+        
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+        
+        // Add markers for three North American cities
+
+        //adding a marker to the map at Philadelphia, referencing the "marker" section of the Leaflet
+// L.marker([39.95363,-75.16462]).addTo(map).bindPopup('Philadelphia')
+
+        L.marker([40.7128, -74.0060]).addTo(map)
+            .bindPopup('<b>New York City</b><br>United States<br>Population: 8.3 million');
+            
+        L.marker([43.6532, -79.3832]).addTo(map)
+            .bindPopup('<b>Toronto</b><br>Canada<br>Population: 2.9 million');
+            
+        L.marker([19.4326, -99.1332]).addTo(map)
+            .bindPopup('<b>Mexico City</b><br>Mexico<br>Population: 9.2 million');
+    </script>
+</body>
+</html>
