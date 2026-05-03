@@ -71,6 +71,8 @@ const personDetails = {
   setElemAttribute('person-lname', personDetails.personal.lastName);
   setElemAttribute('person-age', personDetails.personal.age);
   setElemAttribute('person-email', personDetails.personal.email);
+setElemAttribute('person-location', personDetails.personal.location);
+setElemAttribute('school-duration', personDetails.academic.school.duration);
 
   // professional
   setElemAttribute('person-yoe', personDetails.professional.yoe);
