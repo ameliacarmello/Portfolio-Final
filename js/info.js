@@ -14,17 +14,17 @@ const personDetails = {
       awardsWon: 1,
     },
     academic: {
-      college: {
-        name: "Graduating May 2026",
-       
-        course: "Sociology, Public Health, Healthcare Management, GIS",
-      },
-      school: {
+    college: {
         name: "Temple University",
         duration: "2022 - 2026",
-        course: "Bachelor of Arts"
-      }
+        course: "Sociology, Public Health, Healthcare Management, GIS",
     },
+    school: {
+        name: "Graduating May 2026",
+        duration: "2022 - 2026",
+        course: "Bachelor of Arts"
+    }
+},
     skills: {
       // key: skill name
       // value: skill percentage
