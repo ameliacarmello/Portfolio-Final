@@ -1,0 +1,62 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>New York Art Galleries Map</title>
+
+  <style>
+    html, body, #viewDiv {
+      padding: 0;
+      margin: 0;
+      height: 100%;
+      width: 100%;
+    }
+  </style>
+
+  <link rel="stylesheet" href="https://js.arcgis.com/4.28/esri/themes/light/main.css">
+  <script src="https://js.arcgis.com/4.28/"></script>
+
+<script>
+  /* Prompt: modify this code to make a map of new York art galleries with code for 
+  popups that features the name of the gallery, the city it is located in, and it's telephone number*/
+require([
+  "esri/config",
+  "esri/Map",
+  "esri/views/MapView",
+  "esri/layers/FeatureLayer"
+], function(esriConfig, Map, MapView, FeatureLayer) {
+
+  esriConfig.apiKey = "";
+
+  const map = new Map({
+    basemap: "arcgis/navigation"
+  });
+
+  const view = new MapView({
+    container: "viewDiv",
+    map: map,
+    center: [-74.0060, 40.7128],
+    zoom: 11
+  });
+const popupGalleries = {
+  title: "{name}",
+  content: "<b>City:</b> {city}<br><b>Phone:</b> {tel}"
+};
+
+  const galleriesLayer = new FeatureLayer({
+    url: "https://services.arcgis.com/V6ZHFr6zdgNZuVG0/ArcGIS/rest/services/Art_Galleries_NewYork/FeatureServer/0",
+    outFields: ["*"],
+    popupTemplate: popupGalleries
+  });
+
+  map.add(galleriesLayer);
+
+});
+</script>
+
+</head>
+
+<body>
+  <div id="viewDiv"></div>
+</body>
+</html>
