@@ -6,11 +6,11 @@ const personDetails = {
       age: 21,
       
       location: "Philadelphia, PA",
-      description: "I’m a graduating senior at Temple University that is passionate about people, health, and happiness! I am currently Majoring in Sociology, with minors in Public Health and Healthcare Management, along with a certificate in Geographic Information Systems, or GIS. Some of my passions outside of academics include baking, crochet, long walks, being social, and public health."
+      description: "I’m a graduating senior at Temple University that is passionate about people, health, and happiness! I am currently majoring in Sociology, with minors in Public Health and Healthcare Management, along with a certificate in Geographic Information Systems, or GIS. Some of my passions outside of academics include baking, crochet, long walks, being social, and public health."
     },
     professional: {
       yoe: 1,
-      completedProjects: 7,
+      completedProjects: 8,
       awardsWon: 1,
     },
     academic: {
