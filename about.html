@@ -28,6 +28,13 @@
 
     <link rel="stylesheet" type="text/css" href="css/styleswitcher.css" />
 
+    <style>
+        /* Hide percentage text inside skill circles */
+        .c100 > span { display: none; }
+        /* Make skill circles fully filled */
+        .c100 .bar, .c100 .fill { transform: rotate(180deg); }
+    </style>
+
     <!-- Modernizr JS File -->
     <script src="js/modernizr.custom.js"></script>
 </head>
@@ -147,15 +154,13 @@
                         <ul class="about-list list-unstyled open-sans-font">
                             <li> <span class="title">first name :</span> <span class="value d-block d-sm-inline-block d-lg-block d-xl-inline-block" id="person-fname">Loading...</span> </li>
                             <li> <span class="title">last name :</span> <span class="value d-block d-sm-inline-block d-lg-block d-xl-inline-block" id="person-lname">Loading...</span> </li>
-                            <li> <span class="title">Age :</span> <span class="value d-block d-sm-inline-block d-lg-block d-xl-inline-block" id="person-age"><Loading class=""></Loading></span> </li>
-                              </ul>
+                            <li> <span class="title">Age :</span> <span class="value d-block d-sm-inline-block d-lg-block d-xl-inline-block" id="person-age"></span> </li>
+                        </ul>
                     </div>
                     <div class="col-6">
                         <ul class="about-list list-unstyled open-sans-font">
                             <li> <span class="title">Location :</span> <span class="value d-block d-sm-inline-block d-lg-block d-xl-inline-block" id="person-location">Loading...</span> </li>
-                
                             <li> <span class="title">Email :</span> <span class="value d-block d-sm-inline-block d-lg-block d-xl-inline-block" id="person-email">Loading...</span> </li>
-                            
                         </ul>
                     </div>
                     <div class="col-12 mt-3">
@@ -170,21 +175,13 @@
                     <div class="col-6">
                         <div class="box-stats with-margin">
                             <h3 class="poppins-font position-relative" id="person-yoe">Loading...</h3>
-                            <p class="open-sans-font m-0 position-relative text-uppercase">years of <span class="d-block">experience</span></p>
+                            <p class="open-sans-font m-0 position-relative text-uppercase">years of <span class="d-block">GIS experience</span></p>
                         </div>
                     </div>
                     <div class="col-6">
                         <div class="box-stats with-margin">
                             <h3 class="poppins-font position-relative" id="person-completedProjects">Loading...</h3>
                             <p class="open-sans-font m-0 position-relative text-uppercase">completed <span class="d-block">projects</span></p>
-                        </div>
-                    </div>
-                    
-                    </div>
-                    <div class="col-6">
-                        <div class="box-stats">
-                            <h3 class="poppins-font position-relative" id="person-awardsWon">Loading...</h3>
-                            <p class="open-sans-font m-0 position-relative text-uppercase">awards <span class="d-block">won</span></p>
                         </div>
                     </div>
                 </div>
@@ -198,8 +195,8 @@
                 <h3 class="text-uppercase pb-4 pb-sm-5 mb-3 mb-sm-0 text-left text-sm-center custom-title ft-wt-600">My Skills</h3>
             </div>
             <div class="col-6 col-md-3 mb-3 mb-sm-5">
-                <div class="c100 skill-html">
-                    <span id="skill-html">0%</span>
+                <div class="c100 p100 skill-html">
+                    <span></span>
                     <div class="slice">
                         <div class="bar"></div>
                         <div class="fill"></div>
@@ -208,8 +205,8 @@
                 <h6 class="text-uppercase open-sans-font text-center mt-2 mt-sm-4">html</h6>
             </div>
             <div class="col-6 col-md-3 mb-3 mb-sm-5">
-                <div class="c100 skill-javascript">
-                    <span id="skill-javascript">0%</span>
+                <div class="c100 p100 skill-javascript">
+                    <span></span>
                     <div class="slice">
                         <div class="bar"></div>
                         <div class="fill"></div>
@@ -218,8 +215,8 @@
                 <h6 class="text-uppercase open-sans-font text-center mt-2 mt-sm-4">javascript</h6>
             </div>
             <div class="col-6 col-md-3 mb-3 mb-sm-5">
-                <div class="c100 skill-Leaflet">
-                    <span id="skill-Leaflet">0%</span>
+                <div class="c100 p100 skill-Leaflet">
+                    <span></span>
                     <div class="slice">
                         <div class="bar"></div>
                         <div class="fill"></div>
@@ -228,8 +225,8 @@
                 <h6 class="text-uppercase open-sans-font text-center mt-2 mt-sm-4">Leaflet</h6>
             </div>
             <div class="col-6 col-md-3 mb-3 mb-sm-5">
-                <div class="c100 skill-JS Libraries">
-                    <span id="skill-JS Libraries">0%</span>
+                <div class="c100 p100 skill-jslibraries">
+                    <span></span>
                     <div class="slice">
                         <div class="bar"></div>
                         <div class="fill"></div>
@@ -238,8 +235,8 @@
                 <h6 class="text-uppercase open-sans-font text-center mt-2 mt-sm-4">JS Libraries</h6>
             </div>
             <div class="col-6 col-md-3 mb-3 mb-sm-5">
-                <div class="c100 skill-Amazon Q">
-                    <span id="skill-Amazon Q">0%</span>
+                <div class="c100 p100 skill-amazonq">
+                    <span></span>
                     <div class="slice">
                         <div class="bar"></div>
                         <div class="fill"></div>
@@ -247,10 +244,9 @@
                 </div>
                 <h6 class="text-uppercase open-sans-font text-center mt-2 mt-sm-4">Amazon Q</h6>
             </div>
-
             <div class="col-6 col-md-3 mb-3 mb-sm-5">
-                <div class="c100 skill-Github">
-                    <span id="skill-Github">0%</span>
+                <div class="c100 p100 skill-Github">
+                    <span></span>
                     <div class="slice">
                         <div class="bar"></div>
                         <div class="fill"></div>
@@ -259,8 +255,8 @@
                 <h6 class="text-uppercase open-sans-font text-center mt-2 mt-sm-4">Github</h6>
             </div>
             <div class="col-6 col-md-3 mb-3 mb-sm-5">
-                <div class="c100 skill-vscode">
-                    <span id="skill-vscode">0%</span>
+                <div class="c100 p100 skill-vscode">
+                    <span></span>
                     <div class="slice">
                         <div class="bar"></div>
                         <div class="fill"></div>
@@ -271,41 +267,25 @@
         </div>
         <!-- Skills Ends -->
         <hr class="separator mt-1">
-        <!-- Experience & Education Starts -->
+        <!-- Education Starts -->
         <div class="row">
             <div class="col-12">
                 <h3 class="text-uppercase pb-5 mb-0 text-left text-sm-center custom-title ft-wt-600">Education</h3>
             </div>
-            <div class="col-lg-6 m-15px-tb">
+            <div class="col-12 col-lg-6 m-15px-tb">
                 <div class="resume-box">
                     <ul>
-                        <!-- <li>
-                            <div class="icon">
-                                <i class="fa fa-briefcase"></i>
-                            </div>
-                            <h5 class="poppins-font text-uppercase">👉 <span class="place open-sans-font"> Graduating May 2026</span></h5>
-                            <p class="open-sans-font">Lorem incididunt dolor sit amet, consectetur eiusmod dunt doldunt dol elit, tempor incididunt</p>
-                        </li>
-                        <li>
-                            <div class="icon">
-                                <i class="fa fa-briefcase"></i>
-                            </div>
-                            <span class="time open-sans-font text-uppercase">2026</span>
-                            <h5 class="poppins-font text-uppercase">👉 <span class="place open-sans-font">Let's See 😉</span></h5>
-                            <p class="open-sans-font">Lorem incididunt dolor sit amet, consectetur eiusmod dunt doldunt dol elit, tempor incididunt</p>
-                        </li> -->
                         <li>
                             <div class="icon">
                                 <i class="fa fa-briefcase"></i>
                             </div>
                             <span class="time open-sans-font text-uppercase" id="college-duration">Loading...</span>
                             <h5 class="poppins-font text-uppercase">👉 <span class="place open-sans-font" id="college-name">Loading...</span></h5>
-                            <!-- <p class="open-sans-font">Lorem incididunt dolor sit amet, consectetur eiusmod dunt doldunt dol elit, tempor incididunt</p> -->
                         </li>
                     </ul>
                 </div>
             </div>
-            <div class="col-12 col-lg-5 offset-lg-1 m-15px-tb">
+            <div class="col-12 col-lg-6 m-15px-tb">
                 <div class="resume-box">
                     <ul>
                         <li>
@@ -319,7 +299,7 @@
                 </div>
             </div>
         </div>
-        <!-- Experience & Education Ends -->
+        <!-- Education Ends -->
     </div>
 </section>
 <!-- Main Content Ends -->
